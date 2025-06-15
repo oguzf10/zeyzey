@@ -99,32 +99,26 @@
 </div>
 
 <script>
-  const correctPassword = "zeynep99";
-
-document.getElementById("submitPassword").addEventListener("click", function () {
-  const enteredPassword = document.getElementById("passwordInput").value;
-  if (enteredPassword === correctPassword) {
-    document.getElementById("passwordModal").style.display = "none";
-    document.getElementById("siteContent").style.display = "block";
-
-    // Müzik burada başlasın:
-    const audio = document.getElementById("muzik.mp4");
-    audio.volume = 0.5;
-    audio.play();
-  } else {
-    alert("Şifre yanlış. Lütfen tekrar deneyin.");
-  }
-})//
+ 
 
 function checkPassword() {
-  const password = document.getElementById('passwordInput').value;
-  if (password === 'zeynep99') {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('mainContent').classList.remove('hidden');
-  } else {
-    document.getElementById('error').style.display = 'block';
+    const password = document.getElementById('passwordInput').value;
+    if (password === 'zeynep99') {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('mainContent').classList.remove('hidden');
+      
+      // Müziği otomatik başlat
+      const music = document.getElementById('backgroundMusic');
+      music.volume = 0.5; // Ses seviyesini ayarla (0.1 ile 1.0 arası)
+      music.play().catch(e => console.log("Otomatik çalma engellendi:", e));
+    } else {
+      document.getElementById('error').style.display = 'block';
+    }
   }
-} //
+</script>
+
+</body>
+</html>
 </script>
 
 </body>
