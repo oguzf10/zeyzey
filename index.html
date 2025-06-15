@@ -55,6 +55,32 @@
     video, audio {
       max-width: 90%;
     }
+     /* Yeni eklenen anı defteri stil */
+    .memory-book {
+      background: white;
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #ce93d8;
+      border-radius: 8px;
+      resize: none;
+    }
+    .memory-entry {
+      background: #f8e1f4;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      text-align: left;
+    }
+
   </style>
 </head>
 <body>
@@ -95,6 +121,14 @@
       <source src="muzik.mp3" type="audio/mpeg">
     </audio>
   </section>
+  <section class="memory-book">
+    <h2>💌 Anı Defteri</h2>
+    <p>Bana bir mesaj bırakır mısın?</p>
+    <textarea id="memoryInput" placeholder="Buraya yaz..."></textarea>
+    <button onclick="saveMemory()">Kaydet</button>
+    <div id="memoriesContainer"></div>
+  </section>
+
    <header>Seni Çok Seviyorum Güzelim Bana Son Bir Şans Ver Lütfen :(( </header>
 </div>
 
@@ -115,6 +149,49 @@ function checkPassword() {
       document.getElementById('error').style.display = 'block';
     }
   }
+   function saveMemory() {
+    const memoryText = document.getElementById('memoryInput').value;
+    if (memoryText.trim() === "") return;
+
+    const memoryEntry = document.createElement('div');
+    memoryEntry.className = 'memory-entry';
+    memoryEntry.innerHTML = `
+      <p>${new Date().toLocaleString()}</p>
+      <p>${memoryText}</p>
+    `;
+
+    document.getElementById('memoriesContainer').prepend(memoryEntry);
+    document.getElementById('memoryInput').value = "";
+
+    // LocalStorage'a kaydet (sayfa yenilense bile kalsın)
+    saveToLocalStorage(memoryText);
+  }
+
+  function saveToLocalStorage(memory) {
+    let memories = JSON.parse(localStorage.getItem('loveMemories')) || [];
+    memories.unshift({
+      date: new Date().toLocaleString(),
+      text: memory
+    });
+    localStorage.setItem('loveMemories', JSON.stringify(memories));
+  }
+
+  // Sayfa yüklendiğinde kayıtlı anıları göster
+  window.onload = function() {
+    const savedMemories = JSON.parse(localStorage.getItem('loveMemories')) || [];
+    const container = document.getElementById('memoriesContainer');
+    
+    savedMemories.forEach(memory => {
+      const entry = document.createElement('div');
+      entry.className = 'memory-entry';
+      entry.innerHTML = `
+        <p>${memory.date}</p>
+        <p>${memory.text}</p>
+      `;
+      container.appendChild(entry);
+    });
+  }
+
 </script>
 
 </body>
