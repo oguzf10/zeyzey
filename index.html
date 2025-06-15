@@ -98,6 +98,23 @@
 </div>
 
 <script>
+  const correctPassword = "zeynep99";
+
+document.getElementById("submitPassword").addEventListener("click", function () {
+  const enteredPassword = document.getElementById("passwordInput").value;
+  if (enteredPassword === correctPassword) {
+    document.getElementById("passwordModal").style.display = "none";
+    document.getElementById("siteContent").style.display = "block";
+
+    // Müzik burada başlasın:
+    const audio = document.getElementById("backgroundMusic");
+    audio.volume = 0.5;
+    audio.play();
+  } else {
+    alert("Şifre yanlış. Lütfen tekrar deneyin.");
+  }
+})//
+
 function checkPassword() {
   const password = document.getElementById('passwordInput').value;
   if (password === 'zeynep99') {
@@ -106,7 +123,7 @@ function checkPassword() {
   } else {
     document.getElementById('error').style.display = 'block';
   }
-}
+} //
 </script>
 
 </body>
