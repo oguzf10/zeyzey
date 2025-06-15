@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seninle Her Günüm Anlam Kazandı</title>
+  <style>
+    body {
+      background-color: #f3e5f5;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .login-screen {
+      position: fixed;
+      background: #f3e5f5;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .login-screen input {
+      padding: 10px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .hidden { display: none; }
+    header {
+      background-color: #ce93d8;
+      padding: 2rem 1rem;
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      padding: 1rem;
+    }
+    .gallery img {
+      width: 250px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .video-section, .music-section {
+      margin: 2rem 0;
+    }
+    video, audio {
+      max-width: 90%;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-screen" id="loginScreen">
+  <h2>Hoş Geldin 💜</h2>
+  <p>Giriş için şifreyi gir:</p>
+  <input type="password" id="passwordInput" placeholder="Şifre">
+  <button onclick="checkPassword()">Giriş</button>
+  <p id="error" style="color:red; display:none;">Yanlış şifre 😢</p>
+</div>
+
+<div id="mainContent" class="hidden">
+  <header>Seninle her günüm anlam kazandı</header>
+
+  <section class="gallery">
+    <img src="foto1.jpg" alt="Fotoğraf">
+    <img src="foto2.jpg" alt="Fotoğraf">
+    <img src="foto3.jpg" alt="Fotoğraf">
+    <img src="foto4.jpg" alt="Fotoğraf">
+    <img src="IMG_4094.jpg" alt="Fotoğraf">
+    <img src="IMG_4299.jpg" alt="Fotoğraf">
+    <img src="IMG_4331.jpg" alt="Fotoğraf">
+    <img src="IMG_4359.jpg" alt="Fotoğraf">
+    <img src="IMG_4542.jpg" alt="Fotoğraf">
+  </section>
+
+  <section class="video-section">
+    <h2>Birlikte Geçen Bir An 🎥</h2>
+    <video controls>
+      <source src="video.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <section class="music-section">
+    <h2>Bizim Şarkımız 🎵</h2>
+    <audio controls>
+      <source src="muzik.mp3" type="audio/mpeg">
+    </audio>
+  </section>
+</div>
+
+<script>
+function checkPassword() {
+  const password = document.getElementById('passwordInput').value;
+  if (password === 'zeynep99') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('mainContent').classList.remove('hidden');
+  } else {
+    document.getElementById('error').style.display = 'block';
+  }
+}
+</script>
+
+</body>
+</html>
