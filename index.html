@@ -1,13 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seninle Her Günüm Anlam Kazandı</title>
+  <title>İyi ki Doğdun Prensesim 🎂</title>
   <style>
     body {
-      background-color: #f3e5f5;
+      background: url('dogum_gunu_arka_plan.jpg') no-repeat center center fixed;
+      background-size: cover;
       font-family: 'Segoe UI', sans-serif;
       color: #333;
       margin: 0;
@@ -16,10 +16,11 @@
     }
     .login-screen {
       position: fixed;
-      background: #f3e5f5;
+      background: rgba(255, 255, 255, 0.8);
       top: 0; left: 0; width: 100%; height: 100%;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
+      backdrop-filter: blur(4px);
     }
     .login-screen input {
       padding: 10px;
@@ -30,11 +31,12 @@
     }
     .hidden { display: none; }
     header {
-      background-color: #ce93d8;
+      background-color: #f8bbd0;
       padding: 2rem 1rem;
       font-size: 2rem;
       font-weight: bold;
       color: white;
+      text-shadow: 1px 1px #d81b60;
     }
     .gallery {
       display: flex;
@@ -47,7 +49,7 @@
       width: 250px;
       height: auto;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     .video-section, .music-section {
       margin: 2rem 0;
@@ -55,7 +57,6 @@
     video, audio {
       max-width: 90%;
     }
-     /* Yeni eklenen anı defteri stil */
     .memory-book {
       background: white;
       padding: 2rem;
@@ -69,43 +70,37 @@
       height: 150px;
       padding: 10px;
       margin: 10px 0;
-      border: 2px solid #ce93d8;
+      border: 2px solid #f48fb1;
       border-radius: 8px;
       resize: none;
     }
     .memory-entry {
-      background: #f8e1f4;
+      background: #fde0dc;
       padding: 15px;
       margin: 10px 0;
       border-radius: 8px;
       text-align: left;
     }
-
   </style>
 </head>
 <body>
 
 <div class="login-screen" id="loginScreen">
-  <h2>Hoş Geldin Bitanem 💜</h2>
-  <p>Giriş için şifreyi Girebilir Misin?:</p>
+  <h2>İyi ki Doğdun Prensesim 🎂💜</h2>
+  <p>Sürpriz başlamak üzere... Şifreni girer misin?</p>
   <input type="password" id="passwordInput" placeholder="Şifre">
   <button onclick="checkPassword()">Giriş</button>
   <p id="error" style="color:red; display:none;">Yanlış şifre 😢</p>
 </div>
 
 <div id="mainContent" class="hidden">
-  <header>Seninle Her Günüm Anlam Kazandı 💜 </header>
+  <header>Bugün Senin Günün Zeynep! 🎊</header>
 
   <section class="gallery">
     <img src="foto1.jpg" alt="Fotoğraf">
     <img src="foto2.jpg" alt="Fotoğraf">
     <img src="foto3.jpg" alt="Fotoğraf">
     <img src="foto4.jpg" alt="Fotoğraf">
-    <img src="IMG_4094.jpg" alt="Fotoğraf">
-    <img src="IMG_4299.jpg" alt="Fotoğraf">
-    <img src="IMG_4331.jpg" alt="Fotoğraf">
-    <img src="IMG_4359.jpg" alt="Fotoğraf">
-    <img src="IMG_4542.jpg" alt="Fotoğraf">
   </section>
 
   <section class="video-section">
@@ -116,86 +111,67 @@
   </section>
 
   <section class="music-section">
-    <h2> 🎵 </h2>
-    <audio controls>
+    <h2>Senin için seçtiğim şarkı 🎶</h2>
+    <audio id="backgroundMusic" autoplay loop>
       <source src="muzik.mp3" type="audio/mpeg">
     </audio>
   </section>
+
   <section class="memory-book">
-    <h2>💌 Anı Defteri</h2>
-    <p>Bana bir mesaj bırakır mısın?</p>
+    <h2>💌 Bugüne dair bir şeyler yazar mısın?</h2>
     <textarea id="memoryInput" placeholder="Buraya yaz..."></textarea>
     <button onclick="saveMemory()">Kaydet</button>
     <div id="memoriesContainer"></div>
   </section>
-
-   <header>Seni Çok Seviyorum Güzelim Bana Son Bir Şans Ver Lütfen :(( </header>
 </div>
 
 <script>
- 
-
 function checkPassword() {
-    const password = document.getElementById('passwordInput').value;
-    if (password === 'zeynep99') {
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('mainContent').classList.remove('hidden');
-      
-      // Müziği otomatik başlat
-      const music = document.getElementById('backgroundMusic');
-      music.volume = 0.5; // Ses seviyesini ayarla (0.1 ile 1.0 arası)
-      music.play().catch(e => console.log("Otomatik çalma engellendi:", e));
-    } else {
-      document.getElementById('error').style.display = 'block';
-    }
+  const password = document.getElementById('passwordInput').value;
+  if (password === 'zeynep99') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('mainContent').classList.remove('hidden');
+    const music = document.getElementById('backgroundMusic');
+    music.volume = 0.5;
+    music.play().catch(e => console.log("Otomatik çalma engellendi:", e));
+  } else {
+    document.getElementById('error').style.display = 'block';
   }
-   function saveMemory() {
-    const memoryText = document.getElementById('memoryInput').value;
-    if (memoryText.trim() === "") return;
+}
 
-    const memoryEntry = document.createElement('div');
-    memoryEntry.className = 'memory-entry';
-    memoryEntry.innerHTML = `
-      <p>${new Date().toLocaleString()}</p>
-      <p>${memoryText}</p>
+function saveMemory() {
+  const memoryText = document.getElementById('memoryInput').value;
+  if (memoryText.trim() === "") return;
+  const memoryEntry = document.createElement('div');
+  memoryEntry.className = 'memory-entry';
+  memoryEntry.innerHTML = `
+    <p>${new Date().toLocaleString()}</p>
+    <p>${memoryText}</p>
+  `;
+  document.getElementById('memoriesContainer').prepend(memoryEntry);
+  document.getElementById('memoryInput').value = "";
+  saveToLocalStorage(memoryText);
+}
+
+function saveToLocalStorage(memory) {
+  let memories = JSON.parse(localStorage.getItem('loveMemories')) || [];
+  memories.unshift({ date: new Date().toLocaleString(), text: memory });
+  localStorage.setItem('loveMemories', JSON.stringify(memories));
+}
+
+window.onload = function() {
+  const savedMemories = JSON.parse(localStorage.getItem('loveMemories')) || [];
+  const container = document.getElementById('memoriesContainer');
+  savedMemories.forEach(memory => {
+    const entry = document.createElement('div');
+    entry.className = 'memory-entry';
+    entry.innerHTML = `
+      <p>${memory.date}</p>
+      <p>${memory.text}</p>
     `;
-
-    document.getElementById('memoriesContainer').prepend(memoryEntry);
-    document.getElementById('memoryInput').value = "";
-
-    // LocalStorage'a kaydet (sayfa yenilense bile kalsın)
-    saveToLocalStorage(memoryText);
-  }
-
-  function saveToLocalStorage(memory) {
-    let memories = JSON.parse(localStorage.getItem('loveMemories')) || [];
-    memories.unshift({
-      date: new Date().toLocaleString(),
-      text: memory
-    });
-    localStorage.setItem('loveMemories', JSON.stringify(memories));
-  }
-
-  // Sayfa yüklendiğinde kayıtlı anıları göster
-  window.onload = function() {
-    const savedMemories = JSON.parse(localStorage.getItem('loveMemories')) || [];
-    const container = document.getElementById('memoriesContainer');
-    
-    savedMemories.forEach(memory => {
-      const entry = document.createElement('div');
-      entry.className = 'memory-entry';
-      entry.innerHTML = `
-        <p>${memory.date}</p>
-        <p>${memory.text}</p>
-      `;
-      container.appendChild(entry);
-    });
-  }
-
-</script>
-
-</body>
-</html>
+    container.appendChild(entry);
+  });
+}
 </script>
 
 </body>
